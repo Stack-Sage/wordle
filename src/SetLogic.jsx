@@ -40,6 +40,7 @@ function SetLogic() {
       } catch (error) {
         console.error('Error fetching word lists:', error);
       }
+      console.log(wordSet)
     };
 
     fetchWords();
@@ -50,7 +51,7 @@ function SetLogic() {
       <div className={`flex flex-col w-screen h-screen items-center gap-10 font-bold transition-colors duration-300 ${
         darkMode
           ? 'bg-gradient-to-bl from-neutral-950 via-slate-900 to-black text-neutral-200 '
-          : 'bg-gradient-to-bl from-stone-400 via-neutral-300 to-stone-500 text-black'
+          : 'bg-gradient-to-bl from-stone-600 via-neutral-400 to-stone-800 text-black'
       }`}>
         
         <div className="flex flex-col lg:flex-row gap-4 shadow-md w-full items-center justify-center h-fit p-4 rounded-lg">
@@ -67,7 +68,7 @@ function SetLogic() {
         <div className="flex flex-col">
           {randomWord && wordSet.size > 0 ? (
             <>
-              <Guess wordSet={wordSet} randomWord={randomWord} />
+              <Guess wordSet={wordSet} randomWord={randomWord} darkMode = {darkMode}/>
               <Checker wordSet={wordSet} randomWord={randomWord} />
             </>
           ) : (

@@ -3,6 +3,7 @@ import React from 'react';
 import './App.css';
 import Guess from './Guess';
 import Checker from './Checker';
+import InstructionsModal from './Checker';
 
 function SetLogic() {
   const [wordSet, setWordSet] = useState(new Set());
@@ -48,9 +49,9 @@ function SetLogic() {
 
   return (
     <>
-      <div className={`flex flex-col w-screen h-screen items-center gap-10 font-bold transition-colors duration-300 ${
+      <div className={`flex flex-col w-screen min-h-screen h-full items-center gap-10 font-bold transition-colors duration-300 ${
         darkMode
-          ? 'bg-gradient-to-bl from-neutral-950 via-slate-900 to-black text-neutral-200 '
+          ? 'bg-gradient-to-bl from-black via-slate-950 to-black text-neutral-200 '
           : 'bg-gradient-to-bl from-stone-600 via-neutral-400 to-stone-800 text-black'
       }`}>
         
@@ -64,12 +65,17 @@ function SetLogic() {
           </button>
         </div>
 
+      <div className="hi">
+
+        <InstructionsModal/>
+      </div>
+
         {/* Game Section */}
         <div className="flex flex-col">
           {randomWord && wordSet.size > 0 ? (
             <>
               <Guess wordSet={wordSet} randomWord={randomWord} darkMode = {darkMode}/>
-              <Checker wordSet={wordSet} randomWord={randomWord} />
+            
             </>
           ) : (
             <p>Loading...</p>

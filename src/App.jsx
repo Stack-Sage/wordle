@@ -4,7 +4,7 @@ import SetLogic from './SetLogic'
 const App = () => {
   return (
     <>
-
+      
       <SetLogic/>
       
     </>

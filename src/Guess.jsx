@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 const Guess = ({ wordSet, randomWord, darkMode }) => {
   const matchSet = new Set(wordSet);
 
+  const initialMessage = "🔥 Start Guessing!";
   const [tries, setTries] = useState(6);
   const [guess, setGuess] = useState("");
-  const [message, setMessage] = useState("🔥 Start Guessing!");
+  const [message, setMessage] = useState(initialMessage);
   const [resultValid, setResultValid] = useState("");
   const [guessResult, setGuessResult] = useState("");
   const [lengthError, setLengthError] = useState("");
@@ -26,14 +27,13 @@ const Guess = ({ wordSet, randomWord, darkMode }) => {
     setLengthError("");
 
     if (matchSet.has(funcGuess)) {
-      setResultValid(`${funcGuess.toUpperCase()} is a Valid Word! `);
+      setResultValid(`${funcGuess.toUpperCase()} is a Valid Word!`);
       setTries((prev) => prev - 1);
       setWordPass(true);
 
       if (tries === 1) {
-        setTries("0");
+        setTries(0);
         setMessage(`🔚 You’ve used all your guesses.\nThe word was: ${randomWord.toUpperCase()}\nTry again soon.`);
-
       }
 
       const arrGuess = funcGuess.split("");
@@ -48,15 +48,28 @@ const Guess = ({ wordSet, randomWord, darkMode }) => {
 
       setCommonWord(updatedCommon);
     } else {
-      setResultValid(`${funcGuess}-> is an Invalid Word! ❌ `);
+      setResultValid(`${funcGuess} -> is an Invalid Word! ❌`);
     }
 
     if (randomWord === funcGuess) {
-      setGuessResult(` ${guess.toUpperCase()} is correct Guess !`);
+      setGuessResult(`${guess.toUpperCase()} is correct Guess!`);
       setMessage("🎉 You nailed it!");
     } else {
-      setGuessResult(` ${guess.toUpperCase()} is not the Right Guess`);
+      setGuessResult(`${guess.toUpperCase()} is not the Right Guess`);
     }
+  }
+
+  // Restart Game Function
+  function handleRestart() {
+    setTries(6);
+    setGuess("");
+    setMessage(initialMessage);
+    setResultValid("");
+    setGuessResult("");
+    setLengthError("");
+    setCommonWord(new Set());
+    setShowGuess([]);
+    setWordPass(false);
   }
 
   useEffect(() => {
@@ -69,7 +82,7 @@ const Guess = ({ wordSet, randomWord, darkMode }) => {
 
   return (
     <div
-      className={`w-full max-w-2xl p-6 mx-auto rounded-xl shadow-xl transition-all duration-500 ${
+      className={`w-full max-w-2xl h-full p-6 mx-auto rounded-xl shadow-xl transition-all duration-500 ${
         darkMode
           ? "bg-gradient-to-br border border-white/10"
           : "bg-gradient-to-br from-stone-400 via-neutral-300 to-stone-500  border border-black/10"
@@ -102,6 +115,7 @@ const Guess = ({ wordSet, randomWord, darkMode }) => {
           }`}
         />
 
+        {/* Previous Guesses */}
         <div className="flex flex-col items-center w-full justify-center gap-2">
           {showGuess.map((letters, index) => (
             <div
@@ -113,8 +127,8 @@ const Guess = ({ wordSet, randomWord, darkMode }) => {
                   key={i}
                   className={`font-bold text-center tracking-wide ${
                     commonWord.has(char.toLowerCase())
-                      ? "text-green-400 font-bold  ]"
-                      : "text-yellow-500 "
+                      ? "text-green-400"
+                      : "text-yellow-500"
                   }`}
                 >
                   {char}
@@ -124,6 +138,7 @@ const Guess = ({ wordSet, randomWord, darkMode }) => {
           ))}
         </div>
 
+        {/* Game Info */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-lg">
           <div>
             <p className={`${baseText}`}>Chances Left: </p>
@@ -143,6 +158,7 @@ const Guess = ({ wordSet, randomWord, darkMode }) => {
             </p>
           </div>
         </div>
+
         <p
           className={`italic font-medium text-lg ${
             resultValid.includes("Valid") ? "text-green-400" : "text-red-400"
@@ -159,7 +175,6 @@ const Guess = ({ wordSet, randomWord, darkMode }) => {
           {guessResult}
         </p>
 
-
         <p className="text-orange-400 font-semibold">{lengthError}</p>
 
         <div
@@ -169,6 +184,14 @@ const Guess = ({ wordSet, randomWord, darkMode }) => {
         >
           {message}
         </div>
+
+      
+        <button
+          onClick={handleRestart}
+          className="mt-4 bg-black hover:invert text-white px-5 py-2 rounded-lg font-bold shadow-md transition"
+        >
+          🔄 Restart Game
+        </button>
       </div>
     </div>
   );

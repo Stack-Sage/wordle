@@ -82,10 +82,10 @@ const Guess = ({ wordSet, randomWord, darkMode }) => {
 
   return (
     <div
-      className={`w-full max-w-2xl h-full p-6 mx-auto rounded-xl shadow-xl transition-all duration-500 ${
+      className={`w-full max-w-2xl min-h-[60vh] h-full p-6 mx-auto rounded-xl shadow-xl transition-all duration-500 ${
         darkMode
-          ? "bg-gradient-to-br border border-white/10"
-          : "bg-gradient-to-br from-stone-400 via-neutral-300 to-stone-500  border border-black/10"
+          ? "bg-gradient-to-br from-gray-800 via-black to-gray-900 border border-white/10"
+          : "bg-gradient-to-br from-stone-300 via-neutral-300 to-stone-300  border border-black/5"
       }`}
     >
       <div className="space-y-6 text-center">

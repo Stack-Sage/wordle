@@ -37,11 +37,10 @@ function SetLogic() {
         const selectedWord = solutionList[randomIndex];
         setRandomWord(selectedWord);
 
-        console.log("Word to Guess:", selectedWord);
       } catch (error) {
         console.error("Error fetching word lists:", error);
       }
-      console.log(wordSet);
+     
     };
 
     fetchWords();

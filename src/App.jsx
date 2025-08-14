@@ -61,7 +61,7 @@ const App = () => {
         </script>
       </Helmet>
 
-      <main className="min-h-screen flex flex-col items-center justify-start text-center bg-transparent text-gray-900 transition-colors duration-300">
+      <main className="min-h-screen px-10 flex flex-col items-center justify-start text-center bg-transparent text-gray-900 transition-colors duration-300">
         <motion.h1
           initial={{ opacity: 0, x: -10, y: -10 }}
           animate={{ opacity: 1, x: 0, y: 0 }}

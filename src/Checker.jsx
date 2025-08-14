@@ -63,7 +63,7 @@ export default function InstructionsSection({ darkMode }) {
 
   return (
     <section
-      className={`w-full max-w-4xl mx-auto px-4 py-10 transition-colors duration-300 ${
+      className={`w-full  max-w-4xl mx-auto px-4 py-10 transition-colors duration-300 ${
         darkMode ? "bg-transparent text-gray-100" : "bg-transparent text-gray-900"
       }`}
       aria-labelledby="how-to-play-title"

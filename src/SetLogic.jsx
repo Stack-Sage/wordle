@@ -36,11 +36,9 @@ function SetLogic() {
         const randomIndex = Math.floor(Math.random() * solutionList.length);
         const selectedWord = solutionList[randomIndex];
         setRandomWord(selectedWord);
-
       } catch (error) {
         console.error("Error fetching word lists:", error);
       }
-     
     };
 
     fetchWords();
@@ -48,41 +46,42 @@ function SetLogic() {
 
   return (
     <>
-      <div
-        className={`flex flex-col w-screen min-h-screen h-full items-center gap-10 font-bold transition-colors duration-300 ${
-          darkMode
-            ? "bg-gradient-to-bl from-black via-slate-950 to-black text-neutral-200 "
-            : "bg-gradient-to-bl from-stone-300 via-neutral-300 to-stone-300 text-black"
-        }`}
-      >
-        <div className="flex flex-col lg:flex-row gap-4 shadow-md w-full items-center justify-center h-fit p-4 rounded-lg">
-          <h1 className="text-3xl">WORDLE</h1>
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            className="mt-2 px-4 py-1 bg-white text-black dark:bg-black dark:text-white border rounded hover:scale-105 transition-transform"
-          >
-            {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-          </button>
-        </div>
+      <div className="absolute z-10">
+        <div
+          className={`flex flex-col  min-w-screen min-h-screen h-full items-center gap-10 font-bold transition-colors duration-300 ${
+            darkMode
+              ? "bg-gradient-to-bl from-black via-slate-950 to-black text-neutral-200 "
+              : "bg-gradient-to-bl from-stone-300 via-neutral-300 to-stone-300 text-black"
+          }`}
+        >
+          <div className="flex mt-20 md:mt-14 lg:mt-16 flex-col lg:flex-row gap-4 shadow-md w-full items-center justify-center h-fit p-4 rounded-lg">
+          
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className="mt-2 px-4 py-1 bg-white text-black dark:bg-black dark:text-white border rounded hover:scale-105 transition-transform"
+            >
+              {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
+            </button>
+          </div>
 
-        {/* Game Section */}
-        <div className="flex flex-col">
-          {randomWord && wordSet.size > 0 ? (
-            <>
-              <Guess
-                wordSet={wordSet}
-                randomWord={randomWord}
-                darkMode={darkMode}
-              />
-            </>
-          ) : (
-            <p>Loading...</p>
-          )}
-        </div>
+          {/* Game Section */}
+          <div className="flex flex-col">
+            {randomWord && wordSet.size > 0 ? (
+              <>
+                <Guess
+                  wordSet={wordSet}
+                  randomWord={randomWord}
+                  darkMode={darkMode}
+                />
+              </>
+            ) : (
+              <p>Loading...</p>
+            )}
+          </div>
 
-        <div className="hi">
-          <InstructionsModal darkMode={darkMode} />
-
+          <div className="hi">
+            <InstructionsModal darkMode={darkMode} />
+          </div>
         </div>
       </div>
     </>

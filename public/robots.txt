@@ -1,0 +1,5 @@
+# robots.txt for Wordle121
+User-agent: *
+Allow: /
+
+Sitemap: https://wordle121.onrender.com/sitemap.xml
